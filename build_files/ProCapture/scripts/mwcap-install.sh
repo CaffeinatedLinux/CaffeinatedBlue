@@ -569,26 +569,17 @@ fi
     echo_string ""
     echo_string "========================================================"
 
-else
-    echo_string ""
-    echo_string "========================================================"
-    echo_string ""
-    echo_string "Install Successfully!"
-    echo_string "For more information please check the docs directory or"
-    echo_string "contact support@magewell.net."
-    echo_string ""
-    echo_string "!!!Previous installed module already loaded, reboot is needed!"
-    echo_string_nonewline "Do you wish to reboot now (Y/N) [Y]: "
-    read cont
+#    echo_string_nonewline "Do you wish to reboot now (Y/N) [Y]: "
+#    read cont
 
-    if [ "$cont" = "NO" -o "$cont" = "no" -o "$cont" = "N" -o "$cont" = "n" ]; then
-        echo_string "Reboot canceled! You should reboot your system manually later."
-    else
-        reboot
-    fi
+#    if [ "$cont" = "NO" -o "$cont" = "no" -o "$cont" = "N" -o "$cont" = "n" ]; then
+#        echo_string "Reboot canceled! You should reboot your system manually later."
+#    else
+#        reboot
+#    fi
 
-    echo_string ""
-    echo_string "========================================================"
-fi
+#    echo_string ""
+#    echo_string "========================================================"
+#fi
 
 echo_string ""
