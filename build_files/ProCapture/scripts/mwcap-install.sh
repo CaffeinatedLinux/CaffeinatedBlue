@@ -546,19 +546,19 @@ if [ $SECURE_REBOOT_REQUIRED -eq 1 ]; then
     reboot_to_MOK_manager
 fi
 
-MODULE_LOADED=`lsmod | grep ProCapture`
-if [ -z "$MODULE_LOADED" ]; then
-    MODPROBE=`which modprobe 2>/dev/null`
-    if [ ! -e "$MODPROBE" ]; then
-        echo_string "modprobe is not detected! Please load driver module manually!"
-    else
-        $MODPROBE ProCapture
-        RET=$?
-        if [ $RET -ne 0 ] ; then
-            echo_string "ERROR: Load driver module failed!"
-            error_exit
-        fi
-    fi
+# MODULE_LOADED=`lsmod | grep ProCapture`
+# if [ -z "$MODULE_LOADED" ]; then
+#    MODPROBE=`which modprobe 2>/dev/null`
+#    if [ ! -e "$MODPROBE" ]; then
+#        echo_string "modprobe is not detected! Please load driver module manually!"
+#    else
+#        $MODPROBE ProCapture
+#        RET=$?
+#        if [ $RET -ne 0 ] ; then
+#            echo_string "ERROR: Load driver module failed!"
+#            error_exit
+#        fi
+#    fi
 
     echo_string ""
     echo_string "========================================================"
