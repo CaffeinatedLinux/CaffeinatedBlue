@@ -304,7 +304,7 @@ clean_module () {
 }
 build_module () {
     echo_string_nonewline "Building module for kernel $LATEST_KERNEL ... "
-    make -C $MODULE_BUILD_DIR -j4 >> $LOGFILE 2>&1
+    make -C $MODULE_BUILD_DIR -j4
     RET=$?
     if [ $RET -ne 0 ] ; then
         echo_string ""
