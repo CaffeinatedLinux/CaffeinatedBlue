@@ -401,13 +401,13 @@ install_module () {
         cp -vf $MODULE_INSTALL_DIR/scripts/10-procatpure-event-dev.rules /etc/udev/rules.d/ >> $LOGFILE 2>&1
     fi
 
-    $DEPMOD -a
-    RET=$?
-    if [ $RET -ne 0 ] ; then
-        echo_string ""
-        echo_string "ERROR: Failed to run $DEPMOD !"
-        error_exit
-    fi
+#    $DEPMOD -a
+#    RET=$?
+#    if [ $RET -ne 0 ] ; then
+#        echo_string ""
+#        echo_string "ERROR: Failed to run $DEPMOD !"
+#        error_exit
+#    fi
     echo_string "Done."
 
     if [ -d /etc/modprobe.d ] ; then
