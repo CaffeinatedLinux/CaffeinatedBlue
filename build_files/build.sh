@@ -11,8 +11,8 @@ set -ouex pipefail
 
 # this installs a package from fedora repos
 
-dnf5 group install cosmic-desktop
-dnf5 group install cosmic-desktop-apps
+dnf5 group install -y cosmic-desktop
+dnf5 group install -y cosmic-desktop-apps
 dnf5 install -y tmux gcc kernel-devel-matched make zsh fastfetch
 
 # Use a COPR Example:
