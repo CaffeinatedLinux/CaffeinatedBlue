@@ -1,0 +1,121 @@
+Checking for required tools ... Done.
+Checking for required packages ... Done.
+Checking for previous installation ... None
+Beginning install, please wait... 
+Creating build directory /var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build ... Done.
+Copying driver source into /var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build ... '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./ProCaptureLib_64.lib' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./ProCaptureLib_64.lib'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./Makefile' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./Makefile'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/audio-resample' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/audio-resample'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/audio-resample/resample.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/audio-resample/resample.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/front-end' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/front-end'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/front-end/front-end-types.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/front-end/front-end-types.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/ospi' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/ospi'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/ospi/ospi-linux.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/ospi/ospi-linux.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/ospi/ospi.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/ospi/ospi.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/ospi/ospi-linux.c' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/ospi/ospi-linux.c'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/ospi/linux-file.c' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/ospi/linux-file.c'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/ospi/linux-file.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/ospi/linux-file.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/dma' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/dma'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/dma/mw-dma-mem-priv.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/dma/mw-dma-mem-priv.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/dma/mw-dma-mem.c' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/dma/mw-dma-mem.c'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/dma/mw-dma-user.c' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/dma/mw-dma-user.c'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/dma/mw-dma-kernel.c' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/dma/mw-dma-kernel.c'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/dma/mw-dma-phy.c' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/dma/mw-dma-phy.c'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/picopng' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/picopng'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/picopng/picopng.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/picopng/picopng.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/xi-version.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/xi-version.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/supports' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/supports'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/supports/shared-image-buffer.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/supports/shared-image-buffer.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/supports/karray.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/supports/karray.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/supports/math.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/supports/math.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/supports/xi-timer.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/supports/xi-timer.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/supports/xi-notify-event.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/supports/xi-notify-event.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/supports/image-buffer.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/supports/image-buffer.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/avstream' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/avstream'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/avstream/parameter-manager.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/avstream/parameter-manager.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/avstream/alsa.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/avstream/alsa.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/avstream/capture.c' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/avstream/capture.c'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/avstream/mw-event-ioctl.c' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/avstream/mw-event-ioctl.c'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/avstream/xi-driver.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/avstream/xi-driver.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/avstream/mw-event-ioctl-priv.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/avstream/mw-event-ioctl-priv.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/avstream/v4l2-sg-buf.c' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/avstream/v4l2-sg-buf.c'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/avstream/v4l2-sg-buf.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/avstream/v4l2-sg-buf.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/avstream/mw-event-dev.c' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/avstream/mw-event-dev.c'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/avstream/mw-capture-impl.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/avstream/mw-capture-impl.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/avstream/capture.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/avstream/capture.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/avstream/v4l2.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/avstream/v4l2.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/avstream/mw-event-dev.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/avstream/mw-event-dev.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/avstream/mw-stream.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/avstream/mw-stream.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/avstream/alsa.c' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/avstream/alsa.c'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./sources/avstream/v4l2.c' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./sources/avstream/v4l2.c'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./dkms.conf' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./dkms.conf'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./ProCaptureLib_32.lib' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./ProCaptureLib_32.lib'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./public' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./public'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./public/win-types.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./public/win-types.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./public/Product.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./public/Product.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./public/mw-event-ioctl.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./public/mw-event-ioctl.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./public/mw-smpte.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./public/mw-smpte.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./public/ProductVer.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./public/ProductVer.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./public/mw-fourcc.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./public/mw-fourcc.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./public/mw-hdmi-packets.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./public/mw-hdmi-packets.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./public/mw-common.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./public/mw-common.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./public/mw-procapture-extension.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./public/mw-procapture-extension.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./public/mw-dma-mem.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./public/mw-dma-mem.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./public/mw-procapture-extension-private.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./public/mw-procapture-extension-private.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./public/mw-edid.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./public/mw-edid.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./public/mw-sg.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./public/mw-sg.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./public/mw-iec60958.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./public/mw-iec60958.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./public/mw-linux.h' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./public/mw-linux.h'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./res' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./res'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./res/Unsupported.png' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./res/Unsupported.png'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./res/OSDExample.png' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./res/OSDExample.png'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./res/Template.png' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./res/Template.png'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./res/NoSignal.png' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./res/NoSignal.png'
+'/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/../src/./res/Locking.png' -> '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build/./res/Locking.png'
+Done.
+Building module for kernel 6.17.12-300.fc43.x86_64 ... make: Entering directory '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build'
+cp ProCaptureLib_64.lib ProCaptureLib.o
+touch .ProCaptureLib.o.cmd
+make -C /lib/modules/6.17.12-300.fc43.x86_64/build M=/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build modules
+make[1]: Entering directory '/usr/src/kernels/6.17.12-300.fc43.x86_64'
+make[2]: Entering directory '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build'
+warning: the compiler differs from the one used to build the kernel
+  The kernel was built by: gcc (GCC) 15.2.1 20251111 (Red Hat 15.2.1-4)
+  You are using:           gcc (GCC) 15.2.1 20251211 (Red Hat 15.2.1-5)
+  CC [M]  sources/dma/mw-dma-mem.o
+  CC [M]  sources/dma/mw-dma-user.o
+  CC [M]  sources/dma/mw-dma-kernel.o
+  CC [M]  sources/dma/mw-dma-phy.o
+sources/dma/mw-dma-mem.c:7:10: fatal error: ospi/ospi.h: No such file or directory
+    7 | #include "ospi/ospi.h"
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+make[4]: *** [/usr/src/kernels/6.17.12-300.fc43.x86_64/scripts/Makefile.build:287: sources/dma/mw-dma-mem.o] Error 1
+make[4]: *** Waiting for unfinished jobs....
+In file included from sources/dma/mw-dma-kernel.c:14:
+sources/dma/mw-dma-mem-priv.h:10:10: fatal error: mw-dma-mem.h: No such file or directory
+   10 | #include "mw-dma-mem.h"
+      |          ^~~~~~~~~~~~~~
+In file included from sources/dma/mw-dma-phy.c:14:
+sources/dma/mw-dma-mem-priv.h:10:10: fatal error: mw-dma-mem.h: No such file or directory
+   10 | #include "mw-dma-mem.h"
+      |          ^~~~~~~~~~~~~~
+compilation terminated.
+compilation terminated.
+sources/dma/mw-dma-user.c:15:10: fatal error: ospi/ospi.h: No such file or directory
+   15 | #include "ospi/ospi.h"
+      |          ^~~~~~~~~~~~~
+compilation terminated.
+make[4]: *** [/usr/src/kernels/6.17.12-300.fc43.x86_64/scripts/Makefile.build:287: sources/dma/mw-dma-phy.o] Error 1
+make[4]: *** [/usr/src/kernels/6.17.12-300.fc43.x86_64/scripts/Makefile.build:287: sources/dma/mw-dma-kernel.o] Error 1
+make[4]: *** [/usr/src/kernels/6.17.12-300.fc43.x86_64/scripts/Makefile.build:287: sources/dma/mw-dma-user.o] Error 1
+make[3]: *** [/usr/src/kernels/6.17.12-300.fc43.x86_64/Makefile:2047: .] Error 2
+make[2]: *** [/usr/src/kernels/6.17.12-300.fc43.x86_64/Makefile:248: __sub-make] Error 2
+make[2]: Leaving directory '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build'
+make[1]: *** [Makefile:248: __sub-make] Error 2
+make[1]: Leaving directory '/usr/src/kernels/6.17.12-300.fc43.x86_64'
+make: *** [Makefile:33: all] Error 2
+make: Leaving directory '/var/home/tyler/CaffeinatedBlue/build_files/ProCapture/scripts/mwcap_build'
+
+ERROR: Failed to build module!

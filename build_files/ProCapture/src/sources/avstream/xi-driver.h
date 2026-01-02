@@ -19,14 +19,17 @@
 
 #include "parameter-manager.h"
 
+#include "mw-uio-drv.h"
+#include "mw-fe-uapi.h"
+
 #pragma pack(push)
 #pragma pack(1)
 
 typedef struct _AUDIO_CAPTURE_FRAME {
-    DWORD											dwSyncCode;
-    DWORD											dwReserved;
-    LONGLONG										llTimestamp;
-    DWORD											adwSamples[MWCAP_AUDIO_SAMPLES_PER_FRAME * MWCAP_AUDIO_MAX_NUM_CHANNELS];
+    DWORD           dwSyncCode;
+    DWORD           dwReserved;
+    LONGLONG        llTimestamp;
+    DWORD           adwSamples[MWCAP_AUDIO_SAMPLES_PER_FRAME * MWCAP_AUDIO_MAX_NUM_CHANNELS];
 } AUDIO_CAPTURE_FRAME;
 
 #pragma pack(pop)
@@ -52,7 +55,8 @@ int xi_driver_init(struct xi_driver *pobj, volatile void __iomem *reg_base, os_d
                    png_pix_info_t *unsupported_png,
                    png_pix_info_t *locking_png,
                    os_pci_dev_t pci_dev,
-                   os_pci_dev_t par_dev
+                   os_pci_dev_t par_dev,
+                   struct uio_device *uio_dev
                    );
 
 void xi_driver_deinit(struct xi_driver *pobj);
@@ -133,7 +137,7 @@ const u32 *xi_driver_get_supported_audio_input_sources(struct xi_driver *pobj, i
 
 void xi_driver_get_input_specific_status(struct xi_driver *pobj, int iChannel, INPUT_SPECIFIC_STATUS *status);
 
-void xi_driver_get_video_signal_status(struct xi_driver *pobj,int iChannel,  VIDEO_SIGNAL_STATUS *status);
+void xi_driver_get_video_signal_status(struct xi_driver *pobj, int iChannel, VIDEO_SIGNAL_STATUS *status);
 
 void xi_driver_get_audio_signal_status(struct xi_driver *pobj, int iChannel, AUDIO_SIGNAL_STATUS *status);
 
@@ -266,5 +270,10 @@ int xi_driver_get_sdianc_packets(struct xi_driver *pobj,
                                  int iFrame,
                                  int iCount,
                                  MWCAP_SDI_ANC_PACKET *pPackets);
-
+struct xi_front_end **xi_driver_get_front_end(struct xi_driver *pobj);
+struct uio_device *xi_driver_get_uio_dev(struct xi_driver *pobj);
+void xi_driver_set_crypto_serial(struct xi_driver *pobj, CHAR *szBoardSerialNo);
+int xi_driver_get_device_info(struct xi_driver *pobj, struct mw_board_info *info);
+int xi_driver_set_enable_irq(struct xi_driver *pobj, FRONT_END_INTERRUPT_SOURCE intSource);
+int xi_driver_set_disable_irq(struct xi_driver *pobj, FRONT_END_INTERRUPT_SOURCE intSource);
 #endif /* __XI_DRIVER_H__ */

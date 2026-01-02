@@ -11,7 +11,7 @@ PROCAPTURE_TOP_DIR=$SCRIPT_PATH/..
 SRC_DIR=$PROCAPTURE_TOP_DIR/src
 MODULE_NAME=ProCapture
 MODULE_INSTALL_DIR=/usr/local/share/ProCapture
-MODULE_VERSION=1.3.4418
+MODULE_VERSION=1.3.4490
 
 ARCH=`uname -m | sed -e 's/i.86/i386/'`
 case $ARCH in
@@ -135,6 +135,29 @@ install_tools()
     fi
 }
 
+install_user_fe()
+{
+    if [ ! -d $MODULE_INSTALL_DIR/FE ]; then
+        mkdir -p $MODULE_INSTALL_DIR/FE >> $LOGFILE 2>&1
+        RET=$?
+        if [ $RET -ne 0 ] ; then
+            echo_string ""
+            echo_string "ERROR: Failed to create $MODULE_INSTALL_DIR/FE !"
+            error_exit
+        fi
+    fi
+
+    if [ -d ${PROCAPTURE_TOP_DIR}/FE ]; then
+        cp -rvf $PROCAPTURE_TOP_DIR/FE/mw_fe_$ARCH_BITS $MODULE_INSTALL_DIR/FE/mw_fe >> $LOGFILE 2>&1
+        RET=$?
+        if [ $RET -ne 0 ] ; then
+            echo_string ""
+            echo_string "ERROR: Failed to copy FE files to $MODULE_INSTALL_DIR !"
+            error_exit
+        fi
+    fi
+}
+
 SECOND=""
 while getopts "s" flag ; do
    case "$flag" in
@@ -237,6 +260,7 @@ echo_string "Beginning install, please wait... "
 install_module
 run_dkms
 install_tools
+install_user_fe
 
 MODULE_LOADED=`lsmod | grep ProCapture`
 if [ -z "$MODULE_LOADED" ]; then
@@ -268,14 +292,14 @@ else
     echo_string "contact support@magewell.net."
     echo_string ""
     echo_string "!!!Previous installed module already loaded, reboot is needed! "
-    echo_string_nonewline "Do you wish to reboot later (Y/N) [Y]: "
+    echo_string_nonewline "Do you wish to reboot now (Y/N) [Y]: "
     read cont
 
     if [ "$cont" = "NO" -o "$cont" = "no" -o \
          "$cont" = "N" -o "$cont" = "n" ]; then
-        reboot        
-    else
         echo_string "Reboot canceled! You should reboot your system manually later."
+    else
+        reboot
     fi
 
     echo_string ""

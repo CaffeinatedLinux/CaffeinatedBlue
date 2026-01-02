@@ -1,25 +1,66 @@
-
 ProCapture-objs :=	  \
+	sources/audio-resample/resample.o			\
+	sources/audio-resample/resample-core.o		\
+	sources/supports/math.o						\
+	sources/supports/sort.o                     \
+	sources/supports/sha1.o						\
+	sources/supports/heap.o						\
+	sources/supports/utils.o					\
+	sources/supports/image-buffer.o				\
+	sources/supports/shared-image-buffer.o		\
+	sources/supports/osd-bound-rect.o           \
+	sources/supports/karray.o                   \
+	sources/supports/color-matrix.o				\
+	sources/supports/resource-pool.o			\
+	sources/supports/timer-event-manager.o      \
+	sources/supports/notify-event-manager.o     \
+	sources/supports/sw-timer-event-manager.o   \
+	sources/supports/audio-miscs.o				\
+	sources/front-end/front-end-utils.o  		\
+	sources/front-end/front-end.o				\
+	sources/drivers/irq-control.o             	\
+	sources/drivers/gpio-master.o             	\
+	sources/drivers/i2c-master.o              	\
+	sources/drivers/device-info.o             	\
+	sources/drivers/pcie-dma-controller.o     	\
+	sources/drivers/pcie-dma-desc-chain.o     	\
+	sources/drivers/spi-master.o              	\
+	sources/drivers/qspiflash-micron.o       	\
+	sources/drivers/audio-capture.o           	\
+	sources/drivers/video-capture.o           	\
+	sources/drivers/timestamp.o               	\
+	sources/drivers/pcie-ring-dma-controller.o 	\
+	sources/drivers/pcie-memory-writer.o      	\
+	sources/drivers/pi7c9x2gxxx.o				\
+	sources/drivers/pwm-fan-control.o			\
+	sources/drivers/sdianc.o					\
+	sources/picopng/picopng.o					\
 	sources/dma/mw-dma-mem.o					\
 	sources/dma/mw-dma-user.o					\
 	sources/dma/mw-dma-kernel.o					\
 	sources/dma/mw-dma-phy.o					\
 	sources/ospi/ospi-linux.o					\
 	sources/ospi/linux-file.o  					\
+	sources/avstream/parameter-manager.o        \
+	sources/avstream/xi-driver.o		        \
 	sources/avstream/v4l2.o				        \
 	sources/avstream/v4l2-sg-buf.o				\
+	sources/avstream/mw-capture-impl.o			\
+	sources/avstream/mw-stream.o				\
 	sources/avstream/mw-event-dev.o				\
 	sources/avstream/mw-event-ioctl.o			\
 	sources/avstream/alsa.o				        \
-	sources/avstream/capture.o
-
-ProCapture-objs += ProCaptureLib.o
+	sources/avstream/params_parser.o			\
+	sources/avstream/capture.o                  \
+	sources/avstream/mw-uio-drv.o               \
+	sources/avstream/mw-uio-ioctl.o                \
+	sources/avstream/mw-netlink.o
 
 obj-m = ProCapture.o
 
-EXTRA_CFLAGS += -I$(src) -I$(src)/public -I$(src)/sources
+ccflags-y += -I$(src) -I$(src)/public -I$(src)/sources
 # strip debug symbols
-EXTRA_LDFLAGS += -S
+ldflags-y += -S
 
 ifneq ($(KERNELRELEASE),)
 KERNELDIR ?= /lib/modules/$(KERNELRELEASE)/build
@@ -29,7 +70,7 @@ endif
 
 PWD := $(shell pwd)
 
-all: ProCaptureLib.o
+all:
 	$(MAKE) -C $(KERNELDIR) M=$(PWD) modules
 
 install:
@@ -37,15 +78,4 @@ install:
 
 clean:
 	$(MAKE) -C $(KERNELDIR) M=$(PWD) clean
-
-OS_ARCH := $(shell uname -m | sed -e 's/i.86/i386/')
-ifneq ($(OS_ARCH), i386)
-	ProCaptureLibFile = ProCaptureLib_64.lib
-else
-	ProCaptureLibFile = ProCaptureLib_32.lib
-endif
-ProCaptureLib.o:
-	cp $(ProCaptureLibFile) ProCaptureLib.o
-	touch .ProCaptureLib.o.cmd
-
 

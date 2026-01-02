@@ -7,7 +7,7 @@ PROCAPTURE_TOP_DIR=$SCRIPT_PATH/..
 SRC_DIR=$PROCAPTURE_TOP_DIR/src
 MODULE_NAME=ProCapture
 MODULE_INSTALL_DIR=/usr/local/share/ProCapture
-MODULE_VERSION=1.3.4418
+MODULE_VERSION=1.3.4490
 MODULE_SECURE_NAME=MWMOK
 MOK_DIR=/usr/local/share/MWMOK/
 MOK_DER_FILE=$MOK_DIR/$MODULE_SECURE_NAME.der
@@ -149,14 +149,14 @@ echo_string "Uninstall Successfully!"
 else
     echo_string "Uninstall Successfully!"
     echo_string "!!!!Reboot is needed to unload module!"
-    echo_string_nonewline "Do you wish to reboot later (Y/N) [Y]: "
+    echo_string_nonewline "Do you wish to reboot now (Y/N) [Y]: "
     read cont
 
     if [ "$cont" = "NO" -o "$cont" = "no" -o \
          "$cont" = "N" -o "$cont" = "n" ]; then
-        reboot        
-    else
         echo_string "Reboot canceled! You should reboot your system manually later."
+    else
+        reboot
     fi
 fi
 echo_string ""

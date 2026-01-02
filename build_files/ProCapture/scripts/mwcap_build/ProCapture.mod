@@ -1,0 +1,13 @@
+./sources/dma/mw-dma-mem.o
+./sources/dma/mw-dma-user.o
+./sources/dma/mw-dma-kernel.o
+./sources/dma/mw-dma-phy.o
+./sources/ospi/ospi-linux.o
+./sources/ospi/linux-file.o
+./sources/avstream/v4l2.o
+./sources/avstream/v4l2-sg-buf.o
+./sources/avstream/mw-event-dev.o
+./sources/avstream/mw-event-ioctl.o
+./sources/avstream/alsa.o
+./sources/avstream/capture.o
+./ProCaptureLib.o

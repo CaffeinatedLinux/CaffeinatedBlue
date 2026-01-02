@@ -143,7 +143,11 @@ static void __os_timer_callback_wrapper(unsigned long param)
 #else
 static void __os_timer_callback_wrapper(struct timer_list *t)
 {
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 16, 0))
+    os_timer timer = timer_container_of(timer, t, k_timer);
+#else
     os_timer timer = from_timer(timer, t, k_timer);
+#endif
 
     if (timer && timer->func)
         timer->func(timer->param);
@@ -171,7 +175,13 @@ os_timer os_timer_alloc(timeout_func_t timeout_func, void *param)
 
 void os_timer_free(os_timer timer)
 {
+
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 15, 0))
+    timer_delete(&timer->k_timer);
+#else
     del_timer(&timer->k_timer);
+#endif
+
     kfree(timer);
 }
 
@@ -189,7 +199,11 @@ void os_timer_schedule_relative(os_timer timer, uint32_t timeout_in_ms)
 
 void os_timer_cancel(os_timer timer)
 {
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(6, 15, 0))
+    timer_delete(&timer->k_timer);
+#else
     del_timer(&timer->k_timer);
+#endif
 }
 
 

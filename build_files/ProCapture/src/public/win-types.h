@@ -67,10 +67,10 @@
 typedef unsigned long long                         MWCAP_PTR;
 
 typedef struct _RECT {
-    int left;
-    int top;
-    int right;
-    int bottom;
+	int left;
+	int top;
+	int right;
+	int bottom;
 } RECT;
 
 #pragma pack(pop)
