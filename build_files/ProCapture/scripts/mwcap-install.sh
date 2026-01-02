@@ -2,6 +2,11 @@
 
 LOGFILE=mwcap_install.log
 
+# --- NEW: detect newest installed kernel-devel version ---
+get_latest_kernel_devel() {
+    rpm -qa kernel-devel | sort -V | tail -n1 | sed 's/kernel-devel-//'
+}
+
 if [ -h $0 ]; then
     SCRIPT_PATH=`readlink $0 | xargs dirname`
 else
@@ -15,17 +20,21 @@ MODULE_INSTALL_DIR=/usr/local/share/ProCapture
 MODULE_BUILD_DIR="`pwd`/mwcap_build"
 MODULE_SECURE_NAME=MWMOK
 SECURE_REBOOT_REQUIRED=0
-SIGN_MODULE=/lib/modules/$(uname -r)/build/scripts/sign-file
+
+# --- PATCHED: use newest installed kernel-devel version ---
+LATEST_KERNEL=$(get_latest_kernel_devel)
+SIGN_MODULE=/lib/modules/$LATEST_KERNEL/build/scripts/sign-file
+
 MOK_DIR=/usr/local/share/MWMOK
 MOK_DER_FILE=$MOK_DIR/$MODULE_SECURE_NAME.der
 MOK_PRIV_FILE=$MOK_DIR/$MODULE_SECURE_NAME.priv
 
 ARCH=`uname -m | sed -e 's/i.86/i386/'`
 case $ARCH in
-	i386) ARCH_BITS=32 ;;
-	arm*) ARCH_BITS=arm ;;
-	aarch64) ARCH_BITS=aarch64 ;;
-	*) ARCH_BITS=64 ;;
+    i386) ARCH_BITS=32 ;;
+    arm*) ARCH_BITS=arm ;;
+    aarch64) ARCH_BITS=aarch64 ;;
+    *) ARCH_BITS=64 ;;
 esac
 
 echo_string ()
@@ -244,7 +253,7 @@ clean_module ()
 
 build_module ()
 {
-    echo_string_nonewline "Building module for kernel `uname -r` ... "
+    echo_string_nonewline "Building module for kernel $LATEST_KERNEL ... "
     make -C $MODULE_BUILD_DIR -j4 >> $LOGFILE 2>&1
     RET=$?
     if [ $RET -ne 0 ] ; then
@@ -393,8 +402,12 @@ fi
 
 
 echo_string_nonewline "Checking for required packages ... "
-KERNEL_BASE="/lib/modules/`uname -r`"
+
+# --- PATCHED: use newest installed kernel-devel version ---
+KERNEL_STR=$LATEST_KERNEL
+KERNEL_BASE="/lib/modules/$KERNEL_STR"
 KERNEL_BUILD="$KERNEL_BASE/build"
+
 if [ ! -d $KERNEL_BUILD ]; then
     echo_string ""
     echo_string ""
@@ -404,7 +417,7 @@ if [ ! -d $KERNEL_BUILD ]; then
     echo_string "Required packages: kernel-devel"
     echo_string ""
     echo_string "Please make sure that the correct versions of these packages are"
-    echo_string "installed.  Versions required: `uname -r`"
+    echo_string "installed.  Versions required: $KERNEL_STR"
     error_exit
 else
     echo_string "Done."
@@ -412,7 +425,6 @@ fi
 
 
 echo_string_nonewline "Checking for previous installation ... "
-KERNEL_STR=`uname -r`
 MODULE_FILE=`find /lib/modules/$KERNEL_STR -iname "ProCapture.ko"`
 
 if [ -n "$MODULE_FILE" -o -e "$MODULE_INSTALL_DIR" ]; then
@@ -488,19 +500,4 @@ else
     echo_string "contact support@magewell.net."
     echo_string ""
     echo_string "!!!Previous installed module already loaded, reboot is needed! "
-    echo_string_nonewline "Do you wish to reboot later (Y/N) [Y]: "
-    read cont
-
-    if [ "$cont" = "NO" -o "$cont" = "no" -o \
-         "$cont" = "N" -o "$cont" = "n" ]; then
-        reboot        
-    else
-        echo_string "Reboot canceled! You should reboot your system manually later."
-    fi
-
-    echo_string ""
-    echo_string "========================================================"
-fi
-
-echo_string ""
-
+    echo
