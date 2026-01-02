@@ -12,10 +12,10 @@ set -ouex pipefail
 # this installs a package from fedora repos
 
 dnf5 config-manager addrepo --from-repofile=https://pkgs.tailscale.com/stable/fedora/tailscale.repo
-dnf5 config-manager addrepo --from-repofile=https://repo.vivaldi.com/stable/vivaldi-fedora.repo
+# dnf5 config-manager addrepo --from-repofile=https://repo.vivaldi.com/stable/vivaldi-fedora.repo - Vivaldi Install Failed
 dnf5 group install -y cosmic-desktop
 dnf5 group install -y cosmic-desktop-apps
-dnf5 install -y tmux zsh fastfetch lm_sensors oddjob make oddjob-mkhomedir freeipa-client tailscale vivaldi-stable
+dnf5 install -y tmux zsh fastfetch lm_sensors oddjob make oddjob-mkhomedir freeipa-client tailscale
 
 # Use a COPR Example:
 #
@@ -27,6 +27,7 @@ dnf5 install -y tmux zsh fastfetch lm_sensors oddjob make oddjob-mkhomedir freei
 #### Example for enabling a System Unit File
 
 systemctl enable podman.socket
+
 
 
 
