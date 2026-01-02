@@ -62,10 +62,12 @@ ccflags-y += -I$(src) -I$(src)/public -I$(src)/sources
 # strip debug symbols
 ldflags-y += -S
 
+LATEST_KERNEL := $(shell rpm -qa kernel-devel | sort -V | tail -n1 | sed 's/kernel-devel-//')
+
 ifneq ($(KERNELRELEASE),)
 KERNELDIR ?= /lib/modules/$(KERNELRELEASE)/build
 else
-KERNELDIR ?= /lib/modules/$(shell uname -r)/build
+KERNELDIR ?= /lib/modules/$(LATEST_KERNEL)/build
 endif
 
 PWD := $(shell pwd)
