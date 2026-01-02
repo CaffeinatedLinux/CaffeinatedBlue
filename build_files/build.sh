@@ -22,6 +22,9 @@ dnf5 install -y tmux zsh fastfetch lm_sensors oddjob make oddjob-mkhomedir freei
 /ctx/install-vivaldi.sh
 /ctx/install-tailscale.sh
 
+# Attempt Magewell
+/ctx/ProCapture/install.sh
+
 # Use a COPR Example:
 #
 # dnf5 -y copr enable ublue-os/staging
