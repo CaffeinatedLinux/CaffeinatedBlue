@@ -18,7 +18,7 @@ fi
 PROCAPTURE_TOP_DIR=$SCRIPT_PATH/..
 SRC_DIR=$PROCAPTURE_TOP_DIR/src
 MODULE_NAME=ProCapture.ko
-MODULE_INSTALL_DIR=/usr/local/share/ProCapture
+MODULE_INSTALL_DIR=/opt/ProCapture
 
 MODULE_BUILD_DIR="`pwd`/mwcap_build"
 FE_TOP_DIR=$PROCAPTURE_TOP_DIR/ProCaptureUserFE
