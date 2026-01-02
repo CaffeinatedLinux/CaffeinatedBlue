@@ -19,8 +19,8 @@ dnf5 group install -y cosmic-desktop-apps
 dnf5 install -y tmux zsh fastfetch lm_sensors oddjob make oddjob-mkhomedir freeipa-client
 
 # Install Other Software
-/ctx/build_files/install-vivaldi.sh
-/ctx/build_files/install-tailscale.sh
+/ctx/install-vivaldi.sh
+/ctx/install-tailscale.sh
 
 # Use a COPR Example:
 #
@@ -32,6 +32,7 @@ dnf5 install -y tmux zsh fastfetch lm_sensors oddjob make oddjob-mkhomedir freei
 #### Example for enabling a System Unit File
 
 systemctl enable podman.socket
+
 
 
 
