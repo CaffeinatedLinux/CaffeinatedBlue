@@ -13,7 +13,7 @@ set -ouex pipefail
 
 dnf5 group install -y cosmic-desktop
 dnf5 group install -y cosmic-desktop-apps
-dnf5 install -y tmux gcc make zsh fastfetch
+dnf5 install -y tmux zsh fastfetch
 
 # Use a COPR Example:
 #
