@@ -26,21 +26,12 @@ dnf5 install -y tmux zsh fastfetch lm_sensors oddjob make oddjob-mkhomedir freei
 /ctx/ProCapture/scripts/mwcap-install.sh
 # Register path symlink
 # We do this via tmpfils.d so tht it is created by the live system
- cat >/usr/lib/tmpfiles.d/ProCapture.cnf <<EOF
- L  /usr/local/share/ProCapture  -  -  -  -  /opt/ProCapture
- EOF
-
-
-# Use a COPR Example:
-#
-# dnf5 -y copr enable ublue-os/staging
-# dnf5 -y install package
-# Disable COPRs so they don't end up enabled on the final image:
-# dnf5 -y copr disable ublue-os/staging
-
-#### Example for enabling a System Unit File
-
 systemctl enable podman.socket
+
+ cat >/usr/lib/tmpfiles.d/ProCapture.cnf <<EOF
+ L  /usr/local/share/ProCapture  -  -  -  -  /opt/vivaldi
+EOF
+
 
 
 
