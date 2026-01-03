@@ -16,7 +16,7 @@ dnf5 group install -y cosmic-desktop
 dnf5 group install -y cosmic-desktop-apps
 
 # Install Core Packages
-dnf5 install -y tmux zsh fastfetch lm_sensors oddjob make oddjob-mkhomedir freeipa-client kernel-devel-matched kernel-devel
+dnf5 install -y tmux zsh fastfetch lm_sensors oddjob make oddjob-mkhomedir freeipa-client kernel-devel-matched kernel-devel libcamera-v4l2
 
 # Install Other Software
 /ctx/install-vivaldi.sh
