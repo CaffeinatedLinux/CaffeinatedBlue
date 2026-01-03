@@ -24,6 +24,12 @@ dnf5 install -y tmux zsh fastfetch lm_sensors oddjob make oddjob-mkhomedir freei
 
 # Attempt Magewell
 /ctx/ProCapture/scripts/mwcap-install.sh
+# Register path symlink
+# We do this via tmpfils.d so tht it is created by the live system
+ cat >/usr/lib/tmpfiles.d/ProCapture.cnf <<EOF
+ L  /usr/local/share/ProCapture  -  -  -  -  /opt/ProCapture
+ EOF
+
 
 # Use a COPR Example:
 #
