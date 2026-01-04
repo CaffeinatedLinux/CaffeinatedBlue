@@ -14,6 +14,10 @@ set -ouex pipefail
 # RPM Fusion
 # dnf5 install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
+# V4L KMods
+
+V4L.sh
+
 # Install Groups
 dnf5 group install -y cosmic-desktop
 dnf5 group install -y cosmic-desktop-apps
