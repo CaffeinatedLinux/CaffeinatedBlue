@@ -8,7 +8,7 @@ dnf5 install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release
 # Install Packages
 ls /opt/akmods-common
 
-dnf5 install -y v4l2loopback /opt/akmods-common/rpms/kmods/kmod-v4l2loopback*.rpm
+dnf5 install -y v4l2loopback pipewire-v4l2 /opt/akmods-common/rpms/kmods/kmod-v4l2loopback*.rpm
 
 # Remove RPMFusion
 dnf5 -y remove rpmfusion-free-release
