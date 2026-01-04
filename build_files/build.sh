@@ -11,14 +11,15 @@ set -ouex pipefail
 
 # this installs a package from fedora repos
 
-
+# RPM Fusion
+dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 # Install Groups
 dnf5 group install -y cosmic-desktop
 dnf5 group install -y cosmic-desktop-apps
 
 # Install Core Packages
-dnf5 install -y zsh fastfetch lm_sensors oddjob make oddjob-mkhomedir freeipa-client kernel-devel-matched kernel-devel libcamera-v4l2 v4l2loopback
+dnf5 install -y zsh fastfetch lm_sensors oddjob make oddjob-mkhomedir freeipa-client kernel-devel-matched kernel-devel libcamera-v4l2 v4l2loopback v4l-utils-devel-tools
 
 # Install Other Software
 /ctx/install-vivaldi.sh
