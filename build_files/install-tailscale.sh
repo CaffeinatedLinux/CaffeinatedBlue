@@ -11,7 +11,8 @@ dnf5 config-manager addrepo --from-repofile=https://pkgs.tailscale.com/stable/fe
 dnf5 install -y tailscale
 
 # Clean up the repo
-rm /etc/um.repos.d/tailscale.repo -f
+rm /etc/yum.repos.d/tailscale.repo -f
 
 # Enable Service
 systemctl enable tailscaled.service
+

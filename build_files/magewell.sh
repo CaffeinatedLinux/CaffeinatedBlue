@@ -10,5 +10,5 @@ echo "Installing Magewell Drivers"
 # We do this via tmpfils.d so tht it is created by the live system
 
 cat >/usr/lib/tmpfiles.d/ProCapture.cnf <<EOF
- L  /usr/local/share/ProCapture  -  -  -  -  /opt/ProCapture
+L  /usr/local/share/ProCapture  -  -  -  -  /opt/ProCapture
 EOF
