@@ -41,8 +41,8 @@ RUN find /tmp/akmods-common
 ## optionally install remove old and install new kernel
 # dnf -y remove --no-autoremove kernel kernel-core kernel-modules kernel-modules-core kernel-modules-extra
 ## install ublue support package and desired kmod(s)
-RUN dnf install /tmp/rpms/ublue-os/ublue-os-akmods-addons-0.6-1.fc43.noarch.rpm
-RUN dnf install /tmp/rpms/kmods/kmod-v4l2loopback-6.17.12-300.fc43.x86_64-0.15.3-1.fc43.x86_64.rpm
+RUN dnf install /tmp/akmods-common/rpms/ublue-os/ublue-os-akmods*.rpm
+RUN dnf install /tmp/akmods-common/rpms/kmods/kmod-v4l2loopback*.rpm
             
 ### LINTING
 ## Verify final image and contents are correct.
