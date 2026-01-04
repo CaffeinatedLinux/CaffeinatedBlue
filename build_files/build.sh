@@ -16,7 +16,7 @@ set -ouex pipefail
 
 # V4L KMods
 
-V4L.sh
+/ctx/V4L.sh
 
 # Install Groups
 dnf5 group install -y cosmic-desktop
