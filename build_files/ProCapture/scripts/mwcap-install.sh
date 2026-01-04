@@ -411,10 +411,10 @@ install_module () {
     echo_string "Done."
 
 #    if [ -d /etc/modprobe.d ] ; then
-#        echo_string_nonewline "Installing ProCapture.conf into /etc/modprobe.d/... "
-#        cp -vf $SCRIPT_PATH/ProCapture.conf /etc/modprobe.d/ >> $LOGFILE 2>&1
-#        echo_string "Done."
-#    else
+        echo_string_nonewline "Installing ProCapture.conf into /etc/modprobe.d/... "
+        cp -vf $SCRIPT_PATH/ProCapture.conf /etc/modprobe.d/ >> $LOGFILE 2>&1
+        echo_string "Done."
+    else
 #        echo_string "Skip installation of ProCapture.conf!"
 #    fi
 }
