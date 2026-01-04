@@ -1,3 +1,3 @@
 #!/bin/sh
 
-./scripts/mwcap-install.sh
+/ctx/ProCapture/scripts/mwcap-install.sh
