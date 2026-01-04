@@ -23,7 +23,7 @@ dnf5 install -y tmux zsh fastfetch lm_sensors oddjob make oddjob-mkhomedir freei
 /ctx/install-tailscale.sh
 
 # Magewell Install Script
-/ctx/magewell.sh
+# /ctx/magewell.sh
 
 systemctl enable podman.socket
 
