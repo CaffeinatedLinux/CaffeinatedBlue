@@ -22,17 +22,10 @@ dnf5 install -y tmux zsh fastfetch lm_sensors oddjob make oddjob-mkhomedir freei
 /ctx/install-vivaldi.sh
 /ctx/install-tailscale.sh
 
-# Attempt Magewell
-/ctx/ProCapture/scripts/mwcap-install.sh
-# Register path symlink
-# We do this via tmpfils.d so tht it is created by the live system
+# Magewell Install Script
+/ctx/magewell.sh
+
 systemctl enable podman.socket
-
- cat >/usr/lib/tmpfiles.d/ProCapture.cnf <<EOF
- L  /usr/local/share/ProCapture  -  -  -  -  /opt/vivaldi
-EOF
-
-
 
 
 
