@@ -30,7 +30,7 @@ RUN rm /opt && mkdir /opt
 ## make modifications desired in your image and install packages by modifying the build.sh script
 ## the following RUN directive does all the things required to run "build.sh" as recommended.
 
-COPY --from=ghcr.io/ublue-os/akmods:main-43 / /tmp/akmods-common
+COPY --from=ghcr.io/ublue-os/akmods:main-43 / /opt/akmods-common
 
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
