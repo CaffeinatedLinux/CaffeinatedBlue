@@ -5,7 +5,7 @@ set -ouex pipefail
 echo "Installing Magewell Drivers"
 
 # Attempt Magewell
-/ctx/ProCapture/scripts/mwcap-install.sh
+/ctx/ProCapture/install.sh
 # Register path symlink
 # We do this via tmpfils.d so tht it is created by the live system
 
