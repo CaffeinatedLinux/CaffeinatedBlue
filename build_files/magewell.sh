@@ -11,6 +11,6 @@ sudo dnf5 install -y /ctx/ProCapture/*.rpm
 # Register path symlink
 # We do this via tmpfils.d so tht it is created by the live system
 
-# cat >/usr/lib/tmpfiles.d/ProCapture.cnf <<EOF
-# L  /usr/local/share/ProCapture  -  -  -  -  /opt/ProCapture
-# EOF
+cat >/usr/lib/tmpfiles.d/ProCapture.cnf <<EOF
+L  /usr/local/share/ProCapture  -  -  -  -  /usr/share/procapture
+EOF
