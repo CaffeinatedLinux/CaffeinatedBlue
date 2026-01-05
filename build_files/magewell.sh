@@ -4,7 +4,7 @@ set -ouex pipefail
 
 echo "Installing Magewell Drivers"
 
-sudo dnf5 -y /ctx/ProCapture/*.rpm
+sudo dnf5 install -y /ctx/ProCapture/*.rpm
 
 # Attempt Magewell
 # /ctx/ProCapture/install.sh
