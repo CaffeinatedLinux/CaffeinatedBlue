@@ -23,7 +23,7 @@ dnf5 group install -y cosmic-desktop
 dnf5 group install -y cosmic-desktop-apps
 
 # Install Core Packages
-dnf5 install -y zsh fastfetch lm_sensors oddjob make oddjob-mkhomedir freeipa-client kernel-devel-matched kernel-devel libcamera-v4l2 v4l-utils-devel-tools
+dnf5 install -y zsh fastfetch lm_sensors oddjob make oddjob-mkhomedir freeipa-client kernel-devel-matched kernel-devel libcamera-v4l2 v4l-utils-devel-tools libv4l-devel 
 
 # v4l2loopback v4l-utils-devel-tools --exclude=vlc-plugins-freeworld
 
