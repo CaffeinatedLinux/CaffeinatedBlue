@@ -42,11 +42,30 @@ if [ -d ProCaptureUserFE ]; then
     install -m 0755 ProCaptureUserFE/build/bin/*/mw_fe /usr/bin/mw_fe
 fi
 
-# Install CLI tools
-install -m 0755 bin/mwcap-info_* /usr/bin/mwcap-info
-install -m 0755 bin/mwcap-control_* /usr/bin/mwcap-control
-install -m 0755 scripts/mwcap-repair.sh /usr/bin/mwcap-repair
-install -m 0755 scripts/mwcap-uninstall.sh /usr/bin/mwcap-uninstall
+# Install CLI tools (prebuilt binaries)
+ARCHBITS=$(uname -m)
+case "$ARCHBITS" in
+    x86_64) TOOL_SUFFIX="64" ;;
+    aarch64) TOOL_SUFFIX="aarch64" ;;
+    i386|i686) TOOL_SUFFIX="32" ;;
+    *) TOOL_SUFFIX="64" ;;
+esac
+
+# mwcap-info
+if ls bin/mwcap-info_* >/dev/null 2>&1; then
+    INFO_BIN=$(ls bin/mwcap-info_* | head -n1)
+    install -m 0755 "$INFO_BIN" /usr/bin/mwcap-info
+else
+    echo "Warning: mwcap-info binary not found, skipping"
+fi
+
+# mwcap-control
+if ls bin/mwcap-control_* >/dev/null 2>&1; then
+    CTRL_BIN=$(ls bin/mwcap-control_* | head -n1)
+    install -m 0755 "$CTRL_BIN" /usr/bin/mwcap-control
+else
+    echo "Warning: mwcap-control binary not found, skipping"
+fi
 
 # Install udev rule + modprobe config
 install -m 0644 scripts/10-procatpure-event-dev.rules /usr/lib/udev/rules.d/
