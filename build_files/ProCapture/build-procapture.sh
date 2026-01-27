@@ -16,8 +16,8 @@ dnf install -y \
     cmake
 
 # Unpack source
-tar xf procapture-*.tar.gz
-cd procapture-*/
+# tar xf procapture-*.tar.gz
+cd /ctx/ProCapture
 
 # Build kernel module
 make -C /lib/modules/$KVER/build M=$PWD/src modules
