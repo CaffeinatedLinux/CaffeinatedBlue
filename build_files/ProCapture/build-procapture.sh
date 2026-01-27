@@ -13,21 +13,23 @@ dnf install -y \
     kernel-core-$KVER \
     cmake
 
-# Create a writable copy of the kernel headers
+# Writable kernel headers
 WRITABLE_KERNEL=/tmp/kernel-$KVER
 mkdir -p "$WRITABLE_KERNEL"
 cp -a /usr/src/kernels/$KVER/* "$WRITABLE_KERNEL"
 
-# Unpack source
-# tar xf procapture-*.tar.gz
+# Writable module source
+WRITABLE_SRC=/tmp/procapture-src
+mkdir -p "$WRITABLE_SRC"
 cd /ctx/ProCapture
+cp -a src/* "$WRITABLE_SRC"
 
-# Build module using writable kernel tree
-make -C "$WRITABLE_KERNEL" M=$PWD/src modules
+# Build module
+make -C "$WRITABLE_KERNEL" M="$WRITABLE_SRC" modules
 
 # Install module
 mkdir -p /usr/lib/modules/$KVER/extra
-install -m 0644 src/ProCapture.ko /usr/lib/modules/$KVER/extra/
+install -m 0644 "$WRITABLE_SRC/ProCapture.ko" /usr/lib/modules/$KVER/extra/
 
 # Install assets
 mkdir -p /usr/share/ProCapture/src/res
