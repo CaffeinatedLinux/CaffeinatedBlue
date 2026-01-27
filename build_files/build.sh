@@ -35,6 +35,8 @@ dnf5 install -y zsh fastfetch lm_sensors oddjob make oddjob-mkhomedir freeipa-cl
 # /ctx/magewell.sh
 /ctx/ProCapture/build-procapture.sh
 
+depmod -a
+
 systemctl enable podman.socket
 
 
