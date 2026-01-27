@@ -69,6 +69,6 @@ fi
 
 # Install udev rule + modprobe config
 install -m 0644 scripts/10-procatpure-event-dev.rules /usr/lib/udev/rules.d/
-install -m 0644 /tmp/ProCapture.conf /usr/lib/modprobe.d/ProCapture.conf
+install -m 0644 /ctx/ProCapture/scripts/ProCapture.conf /usr/lib/modprobe.d/ProCapture.conf
 
 echo "ProCapture driver installed successfully."
