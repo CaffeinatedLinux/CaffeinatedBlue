@@ -501,7 +501,7 @@ typedef struct _MWCAP_NOTIFY_ENABLE {
 // Video frame information
 #define MWCAP_MAX_VIDEO_FRAME_COUNT				8
 
-#define MWCAP_MAX_ANC_PACKETS_PER_FRAME			(32)
+#define MWCAP_MAX_ANC_PACKETS_PER_FRAME			(64)
 
 typedef struct _MWCAP_SMPTE_TIMECODE {
 	BYTE 										byFrames;

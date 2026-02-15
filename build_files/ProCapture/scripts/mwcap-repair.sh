@@ -13,22 +13,12 @@ MODULE_NAME=ProCapture
 MODULE_INSTALL_DIR=/usr/local/share/ProCapture
 
 MODULE_BUILD_DIR="`pwd`/mwcap_build"
-FE_TOP_DIR=$PROCAPTURE_TOP_DIR/ProCaptureUserFE
-FE_BUILD_DIR="`pwd`/ProCaptureUserFE/build"
 MODULE_SECURE_NAME=MWMOK
 SECURE_REBOOT_REQUIRED=0
 SIGN_MODULE=/lib/modules/$(uname -r)/build/scripts/sign-file
 MOK_DIR=/usr/local/share/MWMOK
 MOK_DER_FILE=$MOK_DIR/$MODULE_SECURE_NAME.der
 MOK_PRIV_FILE=$MOK_DIR/$MODULE_SECURE_NAME.priv
-
-ARCH=`uname -m | sed -e 's/i.86/i386/'`
-case $ARCH in
-	i386) ARCH_BITS=32 ;;
-	arm*) ARCH_BITS=arm ;;
-	aarch64) ARCH_BITS=aarch64 ;;
-	*) ARCH_BITS=64 ;;
-esac
 
 echo_string ()
 {
@@ -218,44 +208,6 @@ build_prepare ()
         error_exit
     fi
     echo_string "Done."
-
-    if [ -d $FE_TOP_DIR ]; then
-        if [ -d $FE_BUILD_DIR ]; then
-            echo_string "Build directory: $FE_BUILD_DIR already exists."
-
-            echo_string_nonewline "Removing directory $FE_BUILD_DIR ... "
-            rm -rvf $FE_BUILD_DIR >> $LOGFILE 2>&1
-            RET=$?
-            if [ $RET -ne 0 ]; then
-                echo_string "ERROR: Failed to remove directory:"
-                echo_string "   $FE_BUILD_DIR"
-                echo_string "You should remove it manually."
-                error_exit
-            fi
-            echo_string "Done."
-        fi
-
-        echo_string_nonewline "Creating build directory $FE_BUILD_DIR ... "
-        mkdir -p $FE_BUILD_DIR >> $LOGFILE 2>&1
-        RET=$?
-        if [ $RET -ne 0 ]; then
-            echo_string ""
-            echo_string "ERROR: Failed to create build directory $FE_BUILD_DIR"
-            error_exit
-        fi
-        echo_string "Done."
-
-        echo_string "prepare build directory $FE_BUILD_DIR ... "
-        
-        cmake $FE_TOP_DIR -B $FE_BUILD_DIR
-        RET=$?
-        if [ $RET -ne 0 ]; then
-            echo_string ""
-            echo_string "ERROR: Failed to prepare build directory $FE_BUILD_DIR"
-            error_exit
-        fi
-        echo_string "Done."
-    fi
 }
 
 build_clean ()
@@ -270,18 +222,6 @@ build_clean ()
             echo_string "   $MODULE_BUILD_DIR"
             echo_string "You should remove it manually."
         fi
-         echo_string "Done."
-    fi
-
-    if [ -d $FE_BUILD_DIR ]; then
-        echo_string_nonewline "Removing build directory $FE_BUILD_DIR ... "
-        rm -rvf $FE_BUILD_DIR >> $LOGFILE 2>&1
-        RET=$?
-        if [ $RET -ne 0 ]; then
-            echo_string "Warning: Failed to remove build directory:"
-            echo_string "   $FE_BUILD_DIR"
-            echo_string "You should remove it manually."
-        fi
         echo_string "Done."
     fi
 }
@@ -291,9 +231,6 @@ clean_module ()
     echo_string_nonewline "Cleaning module ... "
     if [ -d $MODULE_BUILD_DIR ]; then
         make -C $MODULE_BUILD_DIR clean >> $LOGFILE 2>&1
-    fi
-    if [ -d $FE_BUILD_DIR ]; then
-        make -C $FE_BUILD_DIR clean >> $LOGFILE 2>&1
     fi
     echo_string "Done."
 }
@@ -307,19 +244,6 @@ build_module ()
         echo_string ""
         echo_string "ERROR: Failed to build module!"
         error_exit
-    fi
-    echo_string "Done."
-
-    if [ -d $FE_TOP_DIR ]; then
-        echo_string_nonewline "Building module for fe $ARCH user driver  ... "
-        make -C $FE_BUILD_DIR -j4 >> $LOGFILE 2>&1
-        RET=$?
-        if [ $RET -ne 0 ] ; then
-            echo_string ""
-            echo_string "ERROR: Failed to build user fe!"
-            error_exit
-        fi
-        echo_string "Done."
     fi
 
     if is_secure_boot_enabled; then
@@ -353,29 +277,6 @@ install_module ()
         echo_string ""
         echo_string "ERROR: Failed to install module!"
         error_exit
-    fi
-
-    if [ ! -d $MODULE_INSTALL_DIR/FE ]; then
-        mkdir -p $MODULE_INSTALL_DIR/FE >> $LOGFILE 2>&1
-    fi
-
-    if [ -d $FE_TOP_DIR ]; then
-        cp -rvf $FE_BUILD_DIR/bin/$ARCH/mw_fe $MODULE_INSTALL_DIR/FE/ >> $LOGFILE 2>&1
-        RET=$?
-        if [ $RET -ne 0 ] ; then
-            echo_string ""
-            echo_string "ERROR: Failed to copy FE files to $MODULE_INSTALL_DIR !"
-        fi
-    fi
-
-    if [ -d ${PROCAPTURE_TOP_DIR}/FE ]; then
-        cp -rvf $PROCAPTURE_TOP_DIR/FE/mw_fe_$ARCH_BITS $MODULE_INSTALL_DIR/FE/mw_fe >> $LOGFILE 2>&1
-        RET=$?
-        if [ $RET -ne 0 ] ; then
-            echo_string ""
-            echo_string "ERROR: Failed to copy FE files to $MODULE_INSTALL_DIR !"
-            error_exit
-        fi
     fi
 
     if [ -d /etc/udev/rules.d ]; then

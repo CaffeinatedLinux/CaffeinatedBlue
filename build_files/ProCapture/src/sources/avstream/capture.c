@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 // CONFIDENTIAL and PROPRIETARY software of Magewell Electronics Co., Ltd.
-// Copyright (c) 2011-2024 Magewell Electronics Co., Ltd. (Nanjing)
+// Copyright (c) 2011-2018 Magewell Electronics Co., Ltd. (Nanjing)
 // All rights reserved.
 // This copyright notice MUST be reproduced on all authorized copies.
 ////////////////////////////////////////////////////////////////////////////////
@@ -17,8 +17,6 @@
 #include <linux/videodev2.h>
 #include <linux/vmalloc.h>
 #include <linux/version.h>
-#include <linux/pid.h>
-#include <linux/sched.h>
 
 #include <xi-version.h>
 
@@ -27,17 +25,11 @@
 #include "ospi/linux-file.h"
 
 #include "xi-driver.h"
-#include "mw-uio-drv.h"
 #include "ospi/ospi.h"
 #include "v4l2.h"
 #include "alsa.h"
 #include "capture.h"
 #include "mw-event-dev.h"
-#include "mw-netlink.h"
-#include "mw-uio-drv.h"
-
-static char fe_install_path[PATH_MAX] = "/usr/local/share/ProCapture/FE/mw_fe";
-static char fe_logfile_path[PATH_MAX];
 
 extern void parse_internal_params(struct xi_driver *driver, const char *internal_params);
 
@@ -109,6 +101,17 @@ static unsigned int edid_mode = 4;
 module_param(edid_mode, uint, 00644);
 MODULE_PARM_DESC(edid_mode, "EDID mode for the card with HDMI loop through port");
 
+struct xi_cap_context {
+    void __iomem            *reg_mem; /* pointer to mapped registers memory */
+    struct xi_driver        driver;
+    struct xi_v4l2_dev      v4l2;
+    struct snd_card         *card[MAX_CHANNELS_PER_DEVICE];
+
+    struct tasklet_struct   irq_tasklet;
+
+    bool                    msi_enabled;
+};
+
 static const struct pci_device_id xi_cap_pci_tbl[] = {
     { PCI_DEVICE(XI_CAP_PCI_VENDOR_ID, XI_CAP_PCI_DEVICE_ID1) },
     { PCI_DEVICE(XI_CAP_PCI_VENDOR_ID, XI_CAP_PCI_DEVICE_ID2) },
@@ -169,9 +172,9 @@ int loadPngImage(const char *filename, png_pix_info_t *dinfo)
         return IS_ERR(fp) ? PTR_ERR(fp) : -1;
 
 #if LINUX_VERSION_CODE >= KERNEL_VERSION(4,11,0)
-    ret = vfs_getattr(&fp->f_path, &stat, STATX_BASIC_STATS, AT_STATX_SYNC_AS_STAT);
+	ret = vfs_getattr(&fp->f_path, &stat, STATX_BASIC_STATS, AT_STATX_SYNC_AS_STAT);
 #elif LINUX_VERSION_CODE >= KERNEL_VERSION(3,9,0)
-    ret = vfs_getattr(&fp->f_path, &stat);
+	ret = vfs_getattr(&fp->f_path, &stat);
 #else
     ret = vfs_getattr(fp->f_path.mnt, fp->f_path.dentry, &stat);
 #endif
@@ -236,51 +239,8 @@ static struct pci_dev *__pci_get_parent_bridge(struct pci_dev *pdev)
     return rdev->bus->parent->self;
 }
 
-/**
- * mw_capture_user_fe_start() - start user front end
- * @handle:uio device handle in the system
- */
-static void mw_capture_user_fe_start(int handle)
-{
-    char *argv[] = {
-        "/bin/sh",
-        "-c",
-        NULL,
-        NULL
-    };
-
-    char *envp[] = {
-        "HOME=/",
-        "PATH=/sbin:/bin:/usr/sbin:/usr/bin",
-        NULL
-    };
-
-    char command[256];
-
-    os_memset(fe_logfile_path, 0, sizeof(fe_logfile_path));
-    snprintf(fe_logfile_path, sizeof(fe_logfile_path), "%s_%d", "/usr/local/share/ProCapture/FE/logfile", handle);
-
-    snprintf(command, sizeof(command), "%s %d 2>&1 | tee %s", fe_install_path, handle, fe_logfile_path);
-    argv[2] = command;
-
-    call_usermodehelper(argv[0], argv, envp, UMH_WAIT_EXEC);
-}
-
-static void mw_capture_user_fe_remove(struct xi_cap_context *ctx)
-{
-    if (ctx->info.uio_dev->user_pid) {
-        struct pid *pid;
-
-        xi_debug(5, "user pid:%d\n", ctx->info.uio_dev->user_pid);
-        pid = find_get_pid(ctx->info.uio_dev->user_pid);
-        if (pid)
-            kill_pid(pid, SIGTERM, 1);//stop user front end
-    }
-}
-
 static int xi_cap_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
 {
-    struct device_mem *mem;
     int ret;
     struct xi_cap_context *ctx;
     png_pix_info_t nosignal_png;
@@ -364,30 +324,6 @@ static int xi_cap_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
         goto free_io;
     }
 
-    mem = &ctx->info.mem;
-
-    struct resource *r = &pdev->resource[0];
-
-    if (r->flags != (IORESOURCE_SIZEALIGN | IORESOURCE_MEM))
-        goto free_io;
-
-    mem->addr = r->start & PAGE_MASK;
-    mem->offs = r->start & ~PAGE_MASK;
-    mem->size =
-        (mem->offs + resource_size(r) + PAGE_SIZE - 1) &
-        PAGE_MASK;
-    mem->name = r->name;
-    mem->internal_addr = ctx->reg_mem;
-    if (!mem->internal_addr) {
-        dev_warn(&pdev->dev, "pcim_iomap failed!\n");
-        goto free_io;
-    }
-
-    ctx->info.priv = ctx;
-    ret = mw_uio_dev_register(&pdev->dev, &ctx->info);
-    if (ret < 0)
-        goto free_io;
-
     /* load png */
     memset(&nosignal_png, 0, sizeof(nosignal_png));
     memset(&unsupported_png, 0, sizeof(unsupported_png));
@@ -407,8 +343,7 @@ static int xi_cap_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
     ret = xi_driver_init(&ctx->driver, ctx->reg_mem, &pdev->dev,
                          &nosignal_png, &unsupported_png, &locking_png,
                          __pci_get_bridge_device(pdev),
-                         __pci_get_parent_bridge(pdev),
-                         ctx->info.uio_dev);
+                         __pci_get_parent_bridge(pdev));
     if (ret != 0) {
         goto free_irq;
     }
@@ -431,8 +366,6 @@ static int xi_cap_probe(struct pci_dev *pdev, const struct pci_device_id *ent)
     }
 
     xi_debug(1, VIDEO_CAP_DRIVER_NAME " capture probe OK!\n");
-
-    mw_capture_user_fe_start(ctx->info.uio_dev->handle);
 
     return 0;
 
@@ -468,10 +401,10 @@ static void xi_cap_remove(struct pci_dev *pdev)
     int ch_count;
     int ch_index;
 
+    xi_debug(0, "\n");
+
     if (ctx == NULL)
         return;
-
-    mw_capture_user_fe_remove(ctx);
 
     ch_count = xi_driver_get_channle_count(&ctx->driver);
     for (ch_index = 0; ch_index < ch_count; ch_index++) {
@@ -494,8 +427,6 @@ static void xi_cap_remove(struct pci_dev *pdev)
     if (NULL != ctx->reg_mem)
         pci_iounmap(pdev, ctx->reg_mem);
 
-    mw_uio_dev_unregister(&ctx->info);
-
     pci_release_regions(pdev);
 
     pci_set_drvdata(pdev, NULL);
@@ -508,6 +439,8 @@ static void xi_cap_remove(struct pci_dev *pdev)
 static void xi_cap_shutdown(struct pci_dev *pdev)
 {
     struct xi_cap_context *ctx = pci_get_drvdata(pdev);
+
+    xi_debug(0, "\n");
 
     xi_driver_shutdown(&ctx->driver);
 
@@ -634,13 +567,9 @@ static int __init xi_cap_init(void)
 {
     int ret;
 
-    ret = mw_uio_dev_manager_create();
-    if (ret < 0)
-        return -EINVAL;
-
     ret = os_init();
     if (ret != OS_RETURN_SUCCESS)
-        goto destory_mgr;
+        return ret;
 
     ret = mw_dma_memory_init();
     if (ret != OS_RETURN_SUCCESS)
@@ -655,15 +584,13 @@ static int __init xi_cap_init(void)
         goto pci_err;
 
     return 0;
+
 pci_err:
     mw_event_dev_destroy();
 edev_err:
     mw_dma_memory_deinit();
 dma_err:
     os_deinit();
-destory_mgr:
-    mw_uio_dev_manager_destory();
-
     return ret;
 }
 
@@ -674,8 +601,6 @@ static void __exit xi_cap_cleanup(void)
     mw_event_dev_destroy();
     mw_dma_memory_deinit();
     os_deinit();
-
-    mw_uio_dev_manager_destory();
 }
 
 module_init(xi_cap_init);

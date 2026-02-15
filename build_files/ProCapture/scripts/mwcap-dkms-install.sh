@@ -11,7 +11,7 @@ PROCAPTURE_TOP_DIR=$SCRIPT_PATH/..
 SRC_DIR=$PROCAPTURE_TOP_DIR/src
 MODULE_NAME=ProCapture
 MODULE_INSTALL_DIR=/usr/local/share/ProCapture
-MODULE_VERSION=1.3.4490
+MODULE_VERSION=1.3.4429
 
 ARCH=`uname -m | sed -e 's/i.86/i386/'`
 case $ARCH in
@@ -135,29 +135,6 @@ install_tools()
     fi
 }
 
-install_user_fe()
-{
-    if [ ! -d $MODULE_INSTALL_DIR/FE ]; then
-        mkdir -p $MODULE_INSTALL_DIR/FE >> $LOGFILE 2>&1
-        RET=$?
-        if [ $RET -ne 0 ] ; then
-            echo_string ""
-            echo_string "ERROR: Failed to create $MODULE_INSTALL_DIR/FE !"
-            error_exit
-        fi
-    fi
-
-    if [ -d ${PROCAPTURE_TOP_DIR}/FE ]; then
-        cp -rvf $PROCAPTURE_TOP_DIR/FE/mw_fe_$ARCH_BITS $MODULE_INSTALL_DIR/FE/mw_fe >> $LOGFILE 2>&1
-        RET=$?
-        if [ $RET -ne 0 ] ; then
-            echo_string ""
-            echo_string "ERROR: Failed to copy FE files to $MODULE_INSTALL_DIR !"
-            error_exit
-        fi
-    fi
-}
-
 SECOND=""
 while getopts "s" flag ; do
    case "$flag" in
@@ -260,7 +237,6 @@ echo_string "Beginning install, please wait... "
 install_module
 run_dkms
 install_tools
-install_user_fe
 
 MODULE_LOADED=`lsmod | grep ProCapture`
 if [ -z "$MODULE_LOADED" ]; then

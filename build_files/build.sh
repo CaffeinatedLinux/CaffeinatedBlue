@@ -33,7 +33,7 @@ dnf5 install -y zsh fastfetch lm_sensors oddjob make oddjob-mkhomedir freeipa-cl
 
 # Magewell Install Script
 # /ctx/magewell.sh
-# /ctx/ProCapture/build-procapture.sh
+/ctx/ProCapture/build-procapture.sh
 
 # depmod -a
 
