@@ -19,8 +19,8 @@ set -ouex pipefail
 /ctx/V4L.sh
 
 # Install Groups
-dnf5 group install -y cosmic-desktop
-dnf5 group install -y cosmic-desktop-apps
+dnf5 group install -y cosmic-desktop cosmic-desktop-apps
+# dnf5 group install -y cosmic-desktop-apps
 
 # Install Core Packages
 dnf5 install -y zsh fastfetch lm_sensors oddjob make oddjob-mkhomedir freeipa-client kernel-devel-matched kernel-devel libcamera-v4l2 v4l-utils-devel-tools libv4l-devel 
@@ -33,15 +33,10 @@ dnf5 install -y zsh fastfetch lm_sensors oddjob make oddjob-mkhomedir freeipa-cl
 
 # Magewell Install Script
 # /ctx/magewell.sh
-/ctx/ProCapture/build-procapture.sh
+# /ctx/ProCapture/build-procapture.sh
 
 # depmod -a
 
 systemctl enable podman.socket
-
-
-
-
-
 
 
