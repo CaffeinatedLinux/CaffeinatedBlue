@@ -1,4 +1,8 @@
 export image_name := env("IMAGE_NAME", "CaffeinatedBlue") # output image name, usually same as repo name, change as needed
+export repo_organization := env_var("REPO_ORGANIZATION")
+export image_desc := env_var("IMAGE_DESC")
+export image_keywords := env_var("IMAGE_KEYWORDS")
+export image_logo_url := env_var("IMAGE_LOGO_URL")
 export default_tag := env("DEFAULT_TAG", "latest")
 export bib_image := env("BIB_IMAGE", "quay.io/centos-bootc/bootc-image-builder:latest")
 
