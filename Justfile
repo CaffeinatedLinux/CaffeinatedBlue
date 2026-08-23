@@ -1,3 +1,6 @@
+set dotenv-filename := "image-template.env"
+set dotenv-load
+
 export image_name := env("IMAGE_NAME", "CaffeinatedBlue") # output image name, usually same as repo name, change as needed
 export repo_organization := env_var("REPO_ORGANIZATION")
 export image_desc := env_var("IMAGE_DESC")
